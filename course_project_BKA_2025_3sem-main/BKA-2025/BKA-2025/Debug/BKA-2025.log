@@ -1,0 +1,17 @@
+﻿  Error.cpp
+  FST.cpp
+  Generator.cpp
+  GRB.cpp
+  In.cpp
+  IT.cpp
+  LexAnalysis.cpp
+  Log.cpp
+  LT.cpp
+  BKA-2025.cpp
+  MFST.cpp
+  Parm.cpp
+  PolishNotation.cpp
+D:\University\КПО\CP-BKA-2025\CourseProject\course_project_BKA_2025_3sem-main\BKA-2025\BKA-2025\PolishNotation.cpp(38,39): warning C4018: <: несоответствие типов со знаком и без знака
+  SemAnalysis.cpp
+  Создание кода...
+  BKA-2025.vcxproj -> D:\University\КПО\CP-BKA-2025\CourseProject\course_project_BKA_2025_3sem-main\BKA-2025\Debug\BKA-2025.exe

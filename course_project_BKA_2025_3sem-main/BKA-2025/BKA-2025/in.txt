@@ -1,0 +1,104 @@
+byte function square(byte x)
+[
+	var byte result;
+	result = x * x;
+	return result;
+]
+
+proc function hello()
+[
+	print "Hello, World!";
+	writeline;
+	return;
+]
+
+main[
+	print "=== Test Program ===";
+	writeline;
+	
+	print "1. Byte type (1 byte, -128..127):";
+	writeline;
+	var byte a = 10;
+	var byte b = 5;
+	print "a = "; print a; writeline;
+	print "b = "; print b; writeline;
+	
+	print "2. Arithmetic operations:";
+	writeline;
+	var byte sum;
+	sum = a + b;
+	print "a + b = "; print sum; writeline;
+	
+	var byte diff;
+	diff = a - b;
+	print "a - b = "; print diff; writeline;
+	
+	var byte prod;
+	prod = a * b;
+	print "a * b = "; print prod; writeline;
+	
+	var byte quot;
+	quot = a / b;
+	print "a / b = "; print quot; writeline;
+	
+	var byte rem;
+	rem = a % b;
+	print "a % b = "; print rem; writeline;
+	
+	print "3. Binary literal (0b1010 = 10):";
+	writeline;
+	var byte bin = 0b1010;
+	print "0b1010 = "; print bin; writeline;
+	
+	print "4. Character type:";
+	writeline;
+	var char ch = 'A';
+	print "char ch = "; print ch; writeline;
+	
+	print "5. Math functions:";
+	writeline;
+	var byte neg = -5;
+	var byte absval;
+	absval = myabs(neg);
+	print "myabs(-5) = "; print absval; writeline;
+	
+	var byte base = 2;
+	var byte exp = 3;
+	var byte powval;
+	powval = mypow(base, exp);
+	print "mypow(2, 3) = "; print powval; writeline;
+	
+	print "6. Do-while loop (count from 1 to 5):";
+	writeline;
+	var byte i = 1;
+	do [
+		print i;
+		print " ";
+		i = i + 1;
+	] while i < 6 #;
+	writeline;
+	
+	print "7. If-else condition:";
+	writeline;
+	var byte x = 10;
+	var byte y = 20;
+	is: x < y #
+	if [
+		print "x < y is true";
+	]
+	else [
+		print "x < y is false";
+	]#
+	writeline;
+	
+	print "8. Function call:";
+	writeline;
+	var byte sq;
+	sq = square(4);
+	print "square(4) = "; print sq; writeline;
+	
+	hello();
+	
+	print "=== End of Test ===";
+	writeline;
+]

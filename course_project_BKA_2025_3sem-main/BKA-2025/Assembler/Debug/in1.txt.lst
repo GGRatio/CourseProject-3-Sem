@@ -1,0 +1,702 @@
+Microsoft (R) Macro Assembler Version 14.44.35213.0	    12/11/25 21:08:57
+..\Debug\in1.txt.asm					     Page 1 - 1
+
+
+				.586
+				.model flat, stdcall
+				includelib libucrt.lib
+				includelib kernel32.lib
+				ExitProcess PROTO:DWORD 
+				.stack 4096
+
+
+				 outlich PROTO : DWORD
+
+				 outrad PROTO : DWORD
+
+				 mypow PROTO : DWORD, : DWORD, : DWORD
+
+				 myabs PROTO : DWORD, : DWORD
+
+ 00000000			.const
+ 00000000 0D 0A 00				newline byte 13, 10, 0
+ 00000003 48 65 6C 6C 6F			LTRL1 byte 'Hello, Worlda!', 0
+	   2C 20 57 6F 72
+	   6C 64 61 21 00
+ 00000012 3D 3D 3D 20 54			LTRL2 byte '=== Test Program1 ===', 0
+	   65 73 74 20 50
+	   72 6F 67 72 61
+	   6D 31 20 3D 3D
+	   3D 00
+ 00000028 31 2E 20 42 79			LTRL3 byte '1. Byte type (1 byte, -128..127):', 0
+	   74 65 20 74 79
+	   70 65 20 28 31
+	   20 62 79 74 65
+	   2C 20 2D 31 32
+	   38 2E 2E 31 32
+	   37 29 3A 00
+ 0000004A 0000000A				LTRL4 sdword 10
+ 0000004E 00000005				LTRL5 sdword 5
+ 00000052 61 20 3D 20 00			LTRL6 byte 'a = ', 0
+ 00000057 62 20 3D 20 00			LTRL7 byte 'b = ', 0
+ 0000005C 32 2E 20 41 72			LTRL8 byte '2. Arithmetic operations:', 0
+	   69 74 68 6D 65
+	   74 69 63 20 6F
+	   70 65 72 61 74
+	   69 6F 6E 73 3A
+	   00
+ 00000076 61 20 2B 20 62			LTRL9 byte 'a + b = ', 0
+	   20 3D 20 00
+ 0000007F 61 20 2D 20 62			LTRL10 byte 'a - b = ', 0
+	   20 3D 20 00
+ 00000088 61 20 2A 20 62			LTRL11 byte 'a * b = ', 0
+	   20 3D 20 00
+ 00000091 61 20 2F 20 62			LTRL12 byte 'a / b = ', 0
+	   20 3D 20 00
+ 0000009A 61 20 25 20 62			LTRL13 byte 'a % b = ', 0
+	   20 3D 20 00
+ 000000A3 33 2E 20 42 69			LTRL14 byte '3. Binary literal (0b1010 = 10):', 0
+	   6E 61 72 79 20
+	   6C 69 74 65 72
+	   61 6C 20 28 30
+	   62 31 30 31 30
+	   20 3D 20 31 30
+	   29 3A 00
+ 000000C4 30 62 31 30 31			LTRL15 byte '0b1010 = ', 0
+	   30 20 3D 20 00
+ 000000CE 34 2E 20 43 68			LTRL16 byte '4. Character type:', 0
+	   61 72 61 63 74
+	   65 72 20 74 79
+	   70 65 3A 00
+ 000000E1 41 00					LTRL17 byte 'A', 0
+ 000000E3 63 68 61 72 20			LTRL18 byte 'char ch = ', 0
+	   63 68 20 3D 20
+	   00
+ 000000EE 35 2E 20 4D 61			LTRL19 byte '5. Math functions:', 0
+	   74 68 20 66 75
+	   6E 63 74 69 6F
+	   6E 73 3A 00
+ 00000101 FFFFFFFB				LTRL20 sdword -5
+ 00000105 6D 79 61 62 73			LTRL21 byte 'myabs(-5) = ', 0
+	   28 2D 35 29 20
+	   3D 20 00
+ 00000112 00000002				LTRL22 sdword 2
+ 00000116 00000003				LTRL23 sdword 3
+ 0000011A 6D 79 70 6F 77			LTRL24 byte 'mypow(2, 3) = ', 0
+	   28 32 2C 20 33
+	   29 20 3D 20 00
+ 00000129 36 2E 20 44 6F			LTRL25 byte '6. Do-while loop (count from 1 to 5):', 0
+	   2D 77 68 69 6C
+	   65 20 6C 6F 6F
+	   70 20 28 63 6F
+	   75 6E 74 20 66
+	   72 6F 6D 20 31
+	   20 74 6F 20 35
+	   29 3A 00
+ 0000014F 00000001				LTRL26 sdword 1
+ 00000153 20 00					LTRL27 byte ' ', 0
+ 00000155 00000006				LTRL28 sdword 6
+ 00000159 37 2E 20 49 66			LTRL29 byte '7. If-else condition:', 0
+	   2D 65 6C 73 65
+	   20 63 6F 6E 64
+	   69 74 69 6F 6E
+	   3A 00
+ 0000016F 00000014				LTRL30 sdword 20
+ 00000173 78 20 3C 20 79			LTRL31 byte 'x < y is true', 0
+	   20 69 73 20 74
+	   72 75 65 00
+ 00000181 78 20 3C 20 79			LTRL32 byte 'x < y is false', 0
+	   20 69 73 20 66
+	   61 6C 73 65 00
+ 00000190 38 2E 20 46 75			LTRL33 byte '8. Function call:', 0
+	   6E 63 74 69 6F
+	   6E 20 63 61 6C
+	   6C 3A 00
+ 000001A2 00000004				LTRL34 sdword 4
+ 000001A6 73 71 75 61 72			LTRL35 byte 'square(4) = ', 0
+	   65 28 34 29 20
+	   3D 20 00
+ 000001B3 3D 3D 3D 20 45			LTRL36 byte '=== End of Test ===', 0
+	   6E 64 20 6F 66
+	   20 54 65 73 74
+	   20 3D 3D 3D 00
+ 00000000			.data
+ 00000000 00000000				temp sdword ?
+ 00000004  00000100 [				buffer byte 256 dup(0)
+	    00
+	   ]
+ 00000104 00000000				squareresult dword 0
+ 00000108 00000000				maina dword 0
+ 0000010C 00000000				mainb dword 0
+ 00000110 00000000				mainsum dword 0
+ 00000114 00000000				maindiff dword 0
+ 00000118 00000000				mainprod dword 0
+ 0000011C 00000000				mainquot dword 0
+ 00000120 00000000				mainrem dword 0
+ 00000124 00000000				mainbin dword 0
+ 00000128 00000000				mainch dword ?
+ 0000012C 00000000				mainneg dword 0
+ 00000130 00000000				mainabsval dword 0
+ 00000134 00000000				mainbase dword 0
+ 00000138 00000000				mainexp dword 0
+ 0000013C 00000000				mainpowval dword 0
+ 00000140 00000000				maini dword 0
+ 00000144 00000000				mainx dword 0
+ 00000148 00000000				mainy dword 0
+ 0000014C 00000000				hellosq dword 0
+ 00000000			.code
+
+				;----------- square ------------
+ 00000000			square PROC,
+					squarex : sdword  
+				; --- save registers ---
+ 00000003  53			push ebx
+ 00000004  52			push edx
+				; ----------------------
+ 00000005  FF 75 08		push squarex
+ 00000008  FF 75 08		push squarex
+ 0000000B  5B			pop ebx
+ 0000000C  58			pop eax
+ 0000000D  0F AF C3		imul eax, ebx
+ 00000010  50			push eax
+ 00000011  FF 75 08		push squarex
+ 00000014  5B			pop ebx
+ 00000015  58			pop eax
+ 00000016  0F AF C3		imul eax, ebx
+ 00000019  50			push eax
+
+ 0000001A  5B			pop ebx
+ 0000001B  89 1D 00000104 R	mov squareresult, ebx
+
+				; --- restore registers ---
+ 00000021  5A			pop edx
+ 00000022  5B			pop ebx
+				; -------------------------
+ 00000023  A1 00000104 R	mov eax, squareresult
+				ret
+ 0000002C			square ENDP
+				;------------------------------
+
+
+				;----------- hello ------------
+ 0000002C			hello PROC 
+					
+				; --- save registers ---
+ 0000002C  53			push ebx
+ 0000002D  52			push edx
+				; ----------------------
+
+ 0000002E  68 00000003 R	push offset LTRL1
+ 00000033  E8 00000000 E	call outrad
+
+ 00000038  68 00000000 R	push offset newline
+ 0000003D  E8 00000000 E	call outrad
+
+				; --- restore registers ---
+ 00000042  5A			pop edx
+ 00000043  5B			pop ebx
+				; -------------------------
+ 00000044  C3			ret
+ 00000045			hello ENDP
+				;------------------------------
+
+
+				;----------- MAIN ------------
+ 00000045			main PROC
+
+ 00000045  68 00000012 R	push offset LTRL2
+ 0000004A  E8 00000000 E	call outrad
+
+ 0000004F  68 00000000 R	push offset newline
+ 00000054  E8 00000000 E	call outrad
+
+
+ 00000059  68 00000028 R	push offset LTRL3
+ 0000005E  E8 00000000 E	call outrad
+
+ 00000063  68 00000000 R	push offset newline
+ 00000068  E8 00000000 E	call outrad
+
+ 0000006D  FF 35 0000004A R	push LTRL4
+
+ 00000073  5B			pop ebx
+ 00000074  89 1D 00000108 R	mov maina, ebx
+
+ 0000007A  FF 35 0000004E R	push LTRL5
+
+ 00000080  5B			pop ebx
+ 00000081  89 1D 0000010C R	mov mainb, ebx
+
+
+ 00000087  68 00000052 R	push offset LTRL6
+ 0000008C  E8 00000000 E	call outrad
+
+
+ 00000091  FF 35 00000108 R	push maina
+ 00000097  E8 00000000 E	call outlich
+
+ 0000009C  68 00000000 R	push offset newline
+ 000000A1  E8 00000000 E	call outrad
+
+
+ 000000A6  68 00000057 R	push offset LTRL7
+ 000000AB  E8 00000000 E	call outrad
+
+
+ 000000B0  FF 35 0000010C R	push mainb
+ 000000B6  E8 00000000 E	call outlich
+
+ 000000BB  68 00000000 R	push offset newline
+ 000000C0  E8 00000000 E	call outrad
+
+
+ 000000C5  68 0000005C R	push offset LTRL8
+ 000000CA  E8 00000000 E	call outrad
+
+ 000000CF  68 00000000 R	push offset newline
+ 000000D4  E8 00000000 E	call outrad
+
+ 000000D9  FF 35 00000108 R	push maina
+ 000000DF  FF 35 0000010C R	push mainb
+ 000000E5  5B			pop ebx
+ 000000E6  58			pop eax
+ 000000E7  03 C3		add eax, ebx
+ 000000E9  50			push eax
+
+ 000000EA  5B			pop ebx
+ 000000EB  89 1D 00000110 R	mov mainsum, ebx
+
+
+ 000000F1  68 00000076 R	push offset LTRL9
+ 000000F6  E8 00000000 E	call outrad
+
+
+ 000000FB  FF 35 00000110 R	push mainsum
+ 00000101  E8 00000000 E	call outlich
+
+ 00000106  68 00000000 R	push offset newline
+ 0000010B  E8 00000000 E	call outrad
+
+ 00000110  FF 35 00000108 R	push maina
+ 00000116  FF 35 0000010C R	push mainb
+ 0000011C  5B			pop ebx
+ 0000011D  58			pop eax
+ 0000011E  2B C3		sub eax, ebx
+ 00000120  73 02		jnc bk
+ 00000122  F7 D8		neg eax
+ 00000124			bk: 
+ 00000124  50			push eax
+
+ 00000125  5B			pop ebx
+ 00000126  89 1D 00000114 R	mov maindiff, ebx
+
+
+ 0000012C  68 0000007F R	push offset LTRL10
+ 00000131  E8 00000000 E	call outrad
+
+
+ 00000136  FF 35 00000114 R	push maindiff
+ 0000013C  E8 00000000 E	call outlich
+
+ 00000141  68 00000000 R	push offset newline
+ 00000146  E8 00000000 E	call outrad
+
+ 0000014B  FF 35 00000108 R	push maina
+ 00000151  FF 35 0000010C R	push mainb
+ 00000157  5B			pop ebx
+ 00000158  58			pop eax
+ 00000159  0F AF C3		imul eax, ebx
+ 0000015C  50			push eax
+
+ 0000015D  5B			pop ebx
+ 0000015E  89 1D 00000118 R	mov mainprod, ebx
+
+
+ 00000164  68 00000088 R	push offset LTRL11
+ 00000169  E8 00000000 E	call outrad
+
+
+ 0000016E  FF 35 00000118 R	push mainprod
+ 00000174  E8 00000000 E	call outlich
+
+ 00000179  68 00000000 R	push offset newline
+ 0000017E  E8 00000000 E	call outrad
+
+ 00000183  FF 35 00000108 R	push maina
+ 00000189  FF 35 0000010C R	push mainb
+ 0000018F  5B			pop ebx
+ 00000190  58			pop eax
+ 00000191  99			cdq
+ 00000192  F7 FB		idiv ebx
+ 00000194  50			push eax
+
+ 00000195  5B			pop ebx
+ 00000196  89 1D 0000011C R	mov mainquot, ebx
+
+
+ 0000019C  68 00000091 R	push offset LTRL12
+ 000001A1  E8 00000000 E	call outrad
+
+
+ 000001A6  FF 35 0000011C R	push mainquot
+ 000001AC  E8 00000000 E	call outlich
+
+ 000001B1  68 00000000 R	push offset newline
+ 000001B6  E8 00000000 E	call outrad
+
+ 000001BB  FF 35 00000108 R	push maina
+ 000001C1  FF 35 0000010C R	push mainb
+ 000001C7  5B			pop ebx
+ 000001C8  58			pop eax
+ 000001C9  99			cdq
+ 000001CA  BA 00000000		mov edx,0
+ 000001CF  F7 FB		idiv ebx
+ 000001D1  52			push edx
+
+ 000001D2  5B			pop ebx
+ 000001D3  89 1D 00000120 R	mov mainrem, ebx
+
+
+ 000001D9  68 0000009A R	push offset LTRL13
+ 000001DE  E8 00000000 E	call outrad
+
+
+ 000001E3  FF 35 00000120 R	push mainrem
+ 000001E9  E8 00000000 E	call outlich
+
+ 000001EE  68 00000000 R	push offset newline
+ 000001F3  E8 00000000 E	call outrad
+
+
+ 000001F8  68 000000A3 R	push offset LTRL14
+ 000001FD  E8 00000000 E	call outrad
+
+ 00000202  68 00000000 R	push offset newline
+ 00000207  E8 00000000 E	call outrad
+
+ 0000020C  FF 35 0000004A R	push LTRL4
+
+ 00000212  5B			pop ebx
+ 00000213  89 1D 00000124 R	mov mainbin, ebx
+
+
+ 00000219  68 000000C4 R	push offset LTRL15
+ 0000021E  E8 00000000 E	call outrad
+
+
+ 00000223  FF 35 00000124 R	push mainbin
+ 00000229  E8 00000000 E	call outlich
+
+ 0000022E  68 00000000 R	push offset newline
+ 00000233  E8 00000000 E	call outrad
+
+
+ 00000238  68 000000CE R	push offset LTRL16
+ 0000023D  E8 00000000 E	call outrad
+
+ 00000242  68 00000000 R	push offset newline
+ 00000247  E8 00000000 E	call outrad
+
+ 0000024C  C7 05 00000128 R	mov mainch, offset LTRL17
+	   000000E1 R
+
+ 00000256  68 000000E3 R	push offset LTRL18
+ 0000025B  E8 00000000 E	call outrad
+
+
+ 00000260  FF 35 00000128 R	push mainch
+ 00000266  E8 00000000 E	call outrad
+
+ 0000026B  68 00000000 R	push offset newline
+ 00000270  E8 00000000 E	call outrad
+
+
+ 00000275  68 000000EE R	push offset LTRL19
+ 0000027A  E8 00000000 E	call outrad
+
+ 0000027F  68 00000000 R	push offset newline
+ 00000284  E8 00000000 E	call outrad
+
+ 00000289  FF 35 00000101 R	push LTRL20
+
+ 0000028F  5B			pop ebx
+ 00000290  89 1D 0000012C R	mov mainneg, ebx
+
+
+ 00000296  FF 35 0000012C R	push mainneg
+ 0000029C  68 00000004 R	push offset buffer
+ 000002A1  E8 00000000 E	call myabs
+ 000002A6  50			push eax
+
+ 000002A7  5B			pop ebx
+ 000002A8  89 1D 00000130 R	mov mainabsval, ebx
+
+
+ 000002AE  68 00000105 R	push offset LTRL21
+ 000002B3  E8 00000000 E	call outrad
+
+
+ 000002B8  FF 35 00000130 R	push mainabsval
+ 000002BE  E8 00000000 E	call outlich
+
+ 000002C3  68 00000000 R	push offset newline
+ 000002C8  E8 00000000 E	call outrad
+
+ 000002CD  FF 35 00000112 R	push LTRL22
+
+ 000002D3  5B			pop ebx
+ 000002D4  89 1D 00000134 R	mov mainbase, ebx
+
+ 000002DA  FF 35 00000116 R	push LTRL23
+
+ 000002E0  5B			pop ebx
+ 000002E1  89 1D 00000138 R	mov mainexp, ebx
+
+
+ 000002E7  FF 35 00000138 R	push mainexp
+ 000002ED  FF 35 00000134 R	push mainbase
+ 000002F3  68 00000004 R	push offset buffer
+ 000002F8  E8 00000000 E	call mypow
+ 000002FD  50			push eax
+
+ 000002FE  5B			pop ebx
+ 000002FF  89 1D 0000013C R	mov mainpowval, ebx
+
+
+ 00000305  68 0000011A R	push offset LTRL24
+ 0000030A  E8 00000000 E	call outrad
+
+
+ 0000030F  FF 35 0000013C R	push mainpowval
+ 00000315  E8 00000000 E	call outlich
+
+ 0000031A  68 00000000 R	push offset newline
+ 0000031F  E8 00000000 E	call outrad
+
+
+ 00000324  68 00000129 R	push offset LTRL25
+ 00000329  E8 00000000 E	call outrad
+
+ 0000032E  68 00000000 R	push offset newline
+ 00000333  E8 00000000 E	call outrad
+
+ 00000338  FF 35 0000014F R	push LTRL26
+
+ 0000033E  5B			pop ebx
+ 0000033F  89 1D 00000140 R	mov maini, ebx
+
+ 00000345			dowhile1:
+
+ 00000345  FF 35 00000140 R	push maini
+ 0000034B  E8 00000000 E	call outlich
+
+
+ 00000350  68 00000153 R	push offset LTRL27
+ 00000355  E8 00000000 E	call outrad
+
+ 0000035A  FF 35 00000140 R	push maini
+ 00000360  FF 35 0000014F R	push LTRL26
+ 00000366  5B			pop ebx
+ 00000367  58			pop eax
+ 00000368  03 C3		add eax, ebx
+ 0000036A  50			push eax
+
+ 0000036B  5B			pop ebx
+ 0000036C  89 1D 00000140 R	mov maini, ebx
+
+ 00000372  8B 15 00000140 R	mov edx, maini
+ 00000378  3B 15 00000155 R	cmp edx, LTRL28
+ 0000037E  7C C5		jl dowhile1
+ 00000380			dowhilenext1:
+ 00000380  68 00000000 R	push offset newline
+ 00000385  E8 00000000 E	call outrad
+
+
+ 0000038A  68 00000159 R	push offset LTRL29
+ 0000038F  E8 00000000 E	call outrad
+
+ 00000394  68 00000000 R	push offset newline
+ 00000399  E8 00000000 E	call outrad
+
+ 0000039E  FF 35 0000004A R	push LTRL4
+
+ 000003A4  5B			pop ebx
+ 000003A5  89 1D 00000144 R	mov mainx, ebx
+
+ 000003AB  FF 35 0000016F R	push LTRL30
+
+ 000003B1  5B			pop ebx
+ 000003B2  89 1D 00000148 R	mov mainy, ebx
+
+ 000003B8  8B 15 00000144 R	mov edx, mainx
+ 000003BE  3B 15 00000148 R	cmp edx, mainy
+
+ 000003C4  7C 02		jl right2
+ 000003C6  7D 0C		jge wrong2
+ 000003C8			right2:
+
+ 000003C8  68 00000173 R	push offset LTRL31
+ 000003CD  E8 00000000 E	call outrad
+
+ 000003D2  EB 0A		jmp next2
+ 000003D4			wrong2:
+
+ 000003D4  68 00000181 R	push offset LTRL32
+ 000003D9  E8 00000000 E	call outrad
+
+ 000003DE			next2:
+ 000003DE  68 00000000 R	push offset newline
+ 000003E3  E8 00000000 E	call outrad
+
+
+ 000003E8  68 00000190 R	push offset LTRL33
+ 000003ED  E8 00000000 E	call outrad
+
+ 000003F2  68 00000000 R	push offset newline
+ 000003F7  E8 00000000 E	call outrad
+
+
+ 000003FC  FF 35 000001A2 R	push LTRL34
+ 00000402  E8 FFFFFBF9		call square
+ 00000407  50			push eax
+
+ 00000408  5B			pop ebx
+ 00000409  89 1D 0000014C R	mov hellosq, ebx
+
+
+ 0000040F  68 000001A6 R	push offset LTRL35
+ 00000414  E8 00000000 E	call outrad
+
+
+ 00000419  FF 35 0000014C R	push hellosq
+ 0000041F  E8 00000000 E	call outlich
+
+ 00000424  68 00000000 R	push offset newline
+ 00000429  E8 00000000 E	call outrad
+
+
+ 0000042E  E8 FFFFFBF9		call hello
+
+
+ 00000433  68 000001B3 R	push offset LTRL36
+ 00000438  E8 00000000 E	call outrad
+
+ 0000043D  68 00000000 R	push offset newline
+ 00000442  E8 00000000 E	call outrad
+
+ 00000447  6A 00		push 0
+ 00000449  E8 00000000 E	call ExitProcess
+ 0000044E			main ENDP
+				end main
+Microsoft (R) Macro Assembler Version 14.44.35213.0	    12/11/25 21:08:57
+..\Debug\in1.txt.asm					     Symbols 2 - 1
+
+
+
+
+Segments and Groups:
+
+                N a m e                 Size     Length   Align   Combine Class
+
+CONST  . . . . . . . . . . . . .	32 Bit	 000001C7 Para	  Public  'CONST'	 ReadOnly
+FLAT . . . . . . . . . . . . . .	GROUP
+STACK  . . . . . . . . . . . . .	32 Bit	 00001000 Para	  Stack	  'STACK'	 
+_DATA  . . . . . . . . . . . . .	32 Bit	 00000150 Para	  Public  'DATA'	
+_TEXT  . . . . . . . . . . . . .	32 Bit	 0000044E Para	  Public  'CODE'	
+
+
+Procedures, parameters, and locals:
+
+                N a m e                 Type     Value    Attr
+
+ExitProcess  . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
+hello  . . . . . . . . . . . . .	P Near	 0000002C _TEXT	Length= 00000019 Public STDCALL
+main . . . . . . . . . . . . . .	P Near	 00000045 _TEXT	Length= 00000409 Public STDCALL
+  bk . . . . . . . . . . . . . .	L Near	 00000124 _TEXT	
+  dowhile1 . . . . . . . . . . .	L Near	 00000345 _TEXT	
+  dowhilenext1 . . . . . . . . .	L Near	 00000380 _TEXT	
+  right2 . . . . . . . . . . . .	L Near	 000003C8 _TEXT	
+  wrong2 . . . . . . . . . . . .	L Near	 000003D4 _TEXT	
+  next2  . . . . . . . . . . . .	L Near	 000003DE _TEXT	
+myabs  . . . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
+mypow  . . . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
+outlich  . . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
+outrad . . . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
+square . . . . . . . . . . . . .	P Near	 00000000 _TEXT	Length= 0000002C Public STDCALL
+  squarex  . . . . . . . . . . .	DWord	 bp + 00000008
+
+
+Symbols:
+
+                N a m e                 Type     Value    Attr
+
+@CodeSize  . . . . . . . . . . .	Number	 00000000h   
+@DataSize  . . . . . . . . . . .	Number	 00000000h   
+@Interface . . . . . . . . . . .	Number	 00000003h   
+@Model . . . . . . . . . . . . .	Number	 00000007h   
+@code  . . . . . . . . . . . . .	Text   	 _TEXT
+@data  . . . . . . . . . . . . .	Text   	 FLAT
+@fardata?  . . . . . . . . . . .	Text   	 FLAT
+@fardata . . . . . . . . . . . .	Text   	 FLAT
+@stack . . . . . . . . . . . . .	Text   	 FLAT
+LTRL10 . . . . . . . . . . . . .	Byte	 0000007F CONST	
+LTRL11 . . . . . . . . . . . . .	Byte	 00000088 CONST	
+LTRL12 . . . . . . . . . . . . .	Byte	 00000091 CONST	
+LTRL13 . . . . . . . . . . . . .	Byte	 0000009A CONST	
+LTRL14 . . . . . . . . . . . . .	Byte	 000000A3 CONST	
+LTRL15 . . . . . . . . . . . . .	Byte	 000000C4 CONST	
+LTRL16 . . . . . . . . . . . . .	Byte	 000000CE CONST	
+LTRL17 . . . . . . . . . . . . .	Byte	 000000E1 CONST	
+LTRL18 . . . . . . . . . . . . .	Byte	 000000E3 CONST	
+LTRL19 . . . . . . . . . . . . .	Byte	 000000EE CONST	
+LTRL1  . . . . . . . . . . . . .	Byte	 00000003 CONST	
+LTRL20 . . . . . . . . . . . . .	DWord	 00000101 CONST	
+LTRL21 . . . . . . . . . . . . .	Byte	 00000105 CONST	
+LTRL22 . . . . . . . . . . . . .	DWord	 00000112 CONST	
+LTRL23 . . . . . . . . . . . . .	DWord	 00000116 CONST	
+LTRL24 . . . . . . . . . . . . .	Byte	 0000011A CONST	
+LTRL25 . . . . . . . . . . . . .	Byte	 00000129 CONST	
+LTRL26 . . . . . . . . . . . . .	DWord	 0000014F CONST	
+LTRL27 . . . . . . . . . . . . .	Byte	 00000153 CONST	
+LTRL28 . . . . . . . . . . . . .	DWord	 00000155 CONST	
+LTRL29 . . . . . . . . . . . . .	Byte	 00000159 CONST	
+LTRL2  . . . . . . . . . . . . .	Byte	 00000012 CONST	
+LTRL30 . . . . . . . . . . . . .	DWord	 0000016F CONST	
+LTRL31 . . . . . . . . . . . . .	Byte	 00000173 CONST	
+LTRL32 . . . . . . . . . . . . .	Byte	 00000181 CONST	
+LTRL33 . . . . . . . . . . . . .	Byte	 00000190 CONST	
+LTRL34 . . . . . . . . . . . . .	DWord	 000001A2 CONST	
+LTRL35 . . . . . . . . . . . . .	Byte	 000001A6 CONST	
+LTRL36 . . . . . . . . . . . . .	Byte	 000001B3 CONST	
+LTRL3  . . . . . . . . . . . . .	Byte	 00000028 CONST	
+LTRL4  . . . . . . . . . . . . .	DWord	 0000004A CONST	
+LTRL5  . . . . . . . . . . . . .	DWord	 0000004E CONST	
+LTRL6  . . . . . . . . . . . . .	Byte	 00000052 CONST	
+LTRL7  . . . . . . . . . . . . .	Byte	 00000057 CONST	
+LTRL8  . . . . . . . . . . . . .	Byte	 0000005C CONST	
+LTRL9  . . . . . . . . . . . . .	Byte	 00000076 CONST	
+buffer . . . . . . . . . . . . .	Byte	 00000004 _DATA	
+hellosq  . . . . . . . . . . . .	DWord	 0000014C _DATA	
+mainabsval . . . . . . . . . . .	DWord	 00000130 _DATA	
+maina  . . . . . . . . . . . . .	DWord	 00000108 _DATA	
+mainbase . . . . . . . . . . . .	DWord	 00000134 _DATA	
+mainbin  . . . . . . . . . . . .	DWord	 00000124 _DATA	
+mainb  . . . . . . . . . . . . .	DWord	 0000010C _DATA	
+mainch . . . . . . . . . . . . .	DWord	 00000128 _DATA	
+maindiff . . . . . . . . . . . .	DWord	 00000114 _DATA	
+mainexp  . . . . . . . . . . . .	DWord	 00000138 _DATA	
+maini  . . . . . . . . . . . . .	DWord	 00000140 _DATA	
+mainneg  . . . . . . . . . . . .	DWord	 0000012C _DATA	
+mainpowval . . . . . . . . . . .	DWord	 0000013C _DATA	
+mainprod . . . . . . . . . . . .	DWord	 00000118 _DATA	
+mainquot . . . . . . . . . . . .	DWord	 0000011C _DATA	
+mainrem  . . . . . . . . . . . .	DWord	 00000120 _DATA	
+mainsum  . . . . . . . . . . . .	DWord	 00000110 _DATA	
+mainx  . . . . . . . . . . . . .	DWord	 00000144 _DATA	
+mainy  . . . . . . . . . . . . .	DWord	 00000148 _DATA	
+newline  . . . . . . . . . . . .	Byte	 00000000 CONST	
+squareresult . . . . . . . . . .	DWord	 00000104 _DATA	
+temp . . . . . . . . . . . . . .	DWord	 00000000 _DATA	
+
+	   0 Warnings
+	   0 Errors

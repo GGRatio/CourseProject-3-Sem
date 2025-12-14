@@ -1,0 +1,90 @@
+Microsoft (R) Macro Assembler Version 14.44.35213.0	    12/11/25 20:34:58
+..\Debug\out.txt.asm					     Page 1 - 1
+
+
+				.586
+				.model flat, stdcall
+				includelib libucrt.lib
+				includelib kernel32.lib
+				ExitProcess PROTO:DWORD 
+				.stack 4096
+
+
+				 outlich PROTO : DWORD
+
+				 outrad PROTO : DWORD
+
+				 mypow PROTO : DWORD, : DWORD, : DWORD
+
+				 myabs PROTO : DWORD, : DWORD
+
+ 00000000			.const
+ 00000000 0D 0A 00				newline byte 13, 10, 0
+ 00000003 48 65 6C 6C 6F			LTRL1 byte 'Hello', 0
+	   00
+ 00000000			.data
+ 00000000 00000000				temp sdword ?
+ 00000004  00000100 [				buffer byte 256 dup(0)
+	    00
+	   ]
+ 00000000			.code
+
+				;----------- MAIN ------------
+ 00000000			main PROC
+
+ 00000000  68 00000003 R	push offset LTRL1
+ 00000005  E8 00000000 E	call outrad
+
+ 0000000A  6A 00		push 0
+ 0000000C  E8 00000000 E	call ExitProcess
+ 00000011			main ENDP
+				end main
+Microsoft (R) Macro Assembler Version 14.44.35213.0	    12/11/25 20:34:58
+..\Debug\out.txt.asm					     Symbols 2 - 1
+
+
+
+
+Segments and Groups:
+
+                N a m e                 Size     Length   Align   Combine Class
+
+CONST  . . . . . . . . . . . . .	32 Bit	 00000009 Para	  Public  'CONST'	 ReadOnly
+FLAT . . . . . . . . . . . . . .	GROUP
+STACK  . . . . . . . . . . . . .	32 Bit	 00001000 Para	  Stack	  'STACK'	 
+_DATA  . . . . . . . . . . . . .	32 Bit	 00000104 Para	  Public  'DATA'	
+_TEXT  . . . . . . . . . . . . .	32 Bit	 00000011 Para	  Public  'CODE'	
+
+
+Procedures, parameters, and locals:
+
+                N a m e                 Type     Value    Attr
+
+ExitProcess  . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
+main . . . . . . . . . . . . . .	P Near	 00000000 _TEXT	Length= 00000011 Public STDCALL
+myabs  . . . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
+mypow  . . . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
+outlich  . . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
+outrad . . . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
+
+
+Symbols:
+
+                N a m e                 Type     Value    Attr
+
+@CodeSize  . . . . . . . . . . .	Number	 00000000h   
+@DataSize  . . . . . . . . . . .	Number	 00000000h   
+@Interface . . . . . . . . . . .	Number	 00000003h   
+@Model . . . . . . . . . . . . .	Number	 00000007h   
+@code  . . . . . . . . . . . . .	Text   	 _TEXT
+@data  . . . . . . . . . . . . .	Text   	 FLAT
+@fardata?  . . . . . . . . . . .	Text   	 FLAT
+@fardata . . . . . . . . . . . .	Text   	 FLAT
+@stack . . . . . . . . . . . . .	Text   	 FLAT
+LTRL1  . . . . . . . . . . . . .	Byte	 00000003 CONST	
+buffer . . . . . . . . . . . . .	Byte	 00000004 _DATA	
+newline  . . . . . . . . . . . .	Byte	 00000000 CONST	
+temp . . . . . . . . . . . . . .	DWord	 00000000 _DATA	
+
+	   0 Warnings
+	   0 Errors
