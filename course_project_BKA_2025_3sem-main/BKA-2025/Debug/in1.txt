@@ -1,11 +1,11 @@
 byte function square (byte x, byte z )[
 	var byte l = 12;
-	return 2;
+	return 12;
 ]
 main[	
 	var byte x;
 	x = 12;
-	var byte y;
+	var byte y = 3;
 	y = square (12, 12);
 	var byte p = 10;
 	var byte c = 12;

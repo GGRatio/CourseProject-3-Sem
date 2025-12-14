@@ -17,7 +17,7 @@ namespace Error
 		ERROR_ENTRY_NODEF10(10), ERROR_ENTRY_NODEF10(20), ERROR_ENTRY_NODEF10(30), ERROR_ENTRY_NODEF10(40),
 		ERROR_ENTRY_NODEF10(50), ERROR_ENTRY_NODEF10(60), ERROR_ENTRY_NODEF10(70), ERROR_ENTRY_NODEF10(80), ERROR_ENTRY_NODEF10(90),
 		ERROR_ENTRY(100, "Системная ошибка: параметр -in должен быть задан"), //+
-		ERROR_ENTRY(101, "Системная ошибка: превышена длина входного параметра"), 
+		ERROR_ENTRY(101, "Системная ошибка: превышена длина входного параметра"),
 		ERROR_ENTRY(102, "Системная ошибка: ошибка при открытии файла с исходным кодом(-in)"),
 		ERROR_ENTRY(103, "Системная ошибка: ошибка при открытии файла протокола(-log)"),
 		ERROR_ENTRY_NODEF(104), ERROR_ENTRY_NODEF(105), ERROR_ENTRY_NODEF(106), ERROR_ENTRY_NODEF(107), ERROR_ENTRY_NODEF(108), ERROR_ENTRY_NODEF(109),
@@ -57,7 +57,7 @@ namespace Error
 		ERROR_ENTRY_NODEF10(360),ERROR_ENTRY_NODEF10(370),ERROR_ENTRY_NODEF10(380),ERROR_ENTRY_NODEF10(390),
 		ERROR_ENTRY_NODEF100(400), ERROR_ENTRY_NODEF100(500),
 		ERROR_ENTRY(600, "Синтаксическая ошибка: ошибка в объявлении функции или main"), //+
-		ERROR_ENTRY(601, "Синтаксическая ошибка: ошибка в скобках параметров функции"),
+		ERROR_ENTRY_NODEF(601),
 		ERROR_ENTRY(602, "Синтаксическая ошибка: ошибка в теле функции с return"),
 		ERROR_ENTRY(603, "Синтаксическая ошибка: ошибка в теле функции void"),
 		ERROR_ENTRY(604, "Синтаксическая ошибка: ошибка в параметрах прототипа функции (ожидается запятая)"),//+

@@ -264,18 +264,9 @@ namespace Lexer
 			Log::writeError(log.stream, Error::GetError(303, line, 0));
 			lex_ok = false;
 		}
-		// Сначала проверяем тип - это более приоритетная 
+		//
 
-
-
-		if (itentry->iddatatype == IT::IDDATATYPE::UNDEF)
-		{
-			Log::writeError(log.stream, Error::GetError(300, line, 0));
-			lex_ok = false;
-			return itentry;
-		}
 		
-		// Только если тип определен, проверяем наличие var/function
 		if (i > 1 && itentry->idtype == IT::IDTYPE::V && tables.lextable.table[i - 2].lexema != LEX_VAR)
 		{
 			Log::writeError(log.stream, Error::GetError(304, line, 0));
@@ -296,7 +287,6 @@ namespace Lexer
 		int curline;
 		std::stack <char*> scopes;
 		
-		// Сначала проверяем наличие main
 		for (int i = 0; i < In::InWord::size; i++)
 		{
 			if (strcmp(in.words[i].word, MAIN) == 0)
@@ -316,7 +306,6 @@ namespace Lexer
 			lex_ok = false;
 		}
 		
-		// Сбрасываем счетчик для подсчета во время обработки
 		enterPoint = 0;
 		
 		for (int i = 0; i < In::InWord::size; i++)
@@ -481,10 +470,9 @@ namespace Lexer
 						else
 						{
 							int i = tables.lextable.size - 1;
-							if (i > 0 && tables.lextable.table[i - 1].lexema == LEX_VAR || tables.lextable.table[i].lexema == LEX_VAR
-								|| tables.lextable.table[i - 1].lexema == LEX_FUNCTION || tables.lextable.table[i].lexema == LEX_FUNCTION
-								|| tables.lextable.table[i - 1].lexema == LEX_ID_TYPE || tables.lextable.table[i].lexema == LEX_ID_TYPE
-								|| tables.lextable.table[i - 1].lexema == LEX_VOID || tables.lextable.table[i].lexema == LEX_VOID)
+							// РћС€РёР±РєР° 305 РґРѕР»Р¶РЅР° РІС‹Р·С‹РІР°С‚СЊСЃСЏ С‚РѕР»СЊРєРѕ РїСЂРё РїРѕРІС‚РѕСЂРЅРѕРј РѕР±СЉСЏРІР»РµРЅРёРё,
+							// С‚.Рµ. РєРѕРіРґР° РїРµСЂРµРґ РёРґРµРЅС‚РёС„РёРєР°С‚РѕСЂРѕРј РµСЃС‚СЊ LEX_VAR РёР»Рё LEX_FUNCTION
+							if (i > 0 && (tables.lextable.table[i - 1].lexema == LEX_VAR || tables.lextable.table[i - 1].lexema == LEX_FUNCTION))
 							{
 								Log::writeError(log.stream, Error::GetError(305, curline, 0));
 								lex_ok = false;

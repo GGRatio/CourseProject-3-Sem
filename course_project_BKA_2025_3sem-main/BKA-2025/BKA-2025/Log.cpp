@@ -23,8 +23,9 @@ namespace Log
 		if (!stream.stream->is_open())
 			throw ERROR_THROW(103);
 
-		unsigned char bom[] = { 0xEF, 0xBB, 0xBF };
-		stream.stream->write(reinterpret_cast<char*>(bom), 3);
+		// Убираем UTF-8 BOM, так как используем Windows-1251 для русских символов
+		// unsigned char bom[] = { 0xEF, 0xBB, 0xBF };
+		// stream.stream->write(reinterpret_cast<char*>(bom), 3);
 		wcscpy_s(stream.logfile, logfile);
 		return stream;
 	}

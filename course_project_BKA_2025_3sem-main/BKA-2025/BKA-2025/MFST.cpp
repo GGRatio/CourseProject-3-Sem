@@ -176,10 +176,10 @@ namespace MFST
 			}
 			break;
 		case NS_NORULECHAIN:       MFST_TRACE4(log, "------>NS_NORULECHAIN") 
-			*log.stream << "Синтаксическая ошибка: не найдена ожидаемая конструкция" << std::endl;
+			*log.stream << "Синтаксическая ошибка: не найдено правило для нетерминала" << std::endl;
 			break;
 		case NS_ERROR:             MFST_TRACE4(log, "------>NS_ERROR") 
-			*log.stream << "Синтаксическая ошибка: не найдена ожидаемая конструкция" << std::endl;
+			*log.stream << "Синтаксическая ошибка: не найдено правило для нетерминала" << std::endl;
 			break;
 		case SURPRISE:             MFST_TRACE4(log, "------>SURPRISE") 
 			*log.stream << "Синтаксическая ошибка: неожиданная ситуация" << std::endl;
@@ -216,6 +216,7 @@ namespace MFST
 		if (n < MFST_DIAGN_digit && (lpos = diagnosis[n].lenta_position) >= 0)
 		{
 			errid = grebach.getRule(diagnosis[n].nrule).iderror;
+			
 			Error::ERROR err = Error::GetError(errid);
 			int lineNum = lex.lextable.table[lpos].sn;
 			sprintf_s(buf, MFST_DIAGN_MAXSIZE, "Ошибка %d: строка %d, %s", err.id, lineNum, err.message);

@@ -23,7 +23,7 @@ namespace GRB
 			Rule::Chain(5, TS('['), NS('K'), TS('e'), TS(';'), TS(']'))
 		),
 
-		Rule(NS('P'), GRB_ERROR_SERIES + 1, 2,
+		Rule(NS('P'), GRB_ERROR_SERIES, 2,
 			Rule::Chain(3, TS('('), NS('E'), TS(')')),
 			Rule::Chain(2, TS('('), TS(')'))
 		),
