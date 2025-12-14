@@ -157,7 +157,7 @@ namespace MFST
 		case NS_NORULE:         MFST_TRACE4(log, "------>NS_NORULE")
 			* log.stream << "-------------------------------------------------------------------------------------" << std::endl;
 			{
-				// Output diagnostics and find the most relevant error
+
 				char* diag0 = getDiagnosis(0, buf);
 				*log.stream << diag0 << std::endl;
 				
@@ -171,7 +171,6 @@ namespace MFST
 				if (strlen(diag2) > 0)
 					*log.stream << diag2 << std::endl;
 				
-				// Also output to console
 				if (strlen(diag0) > 0)
 					std::cout << std::endl << diag0 << std::endl;
 			}

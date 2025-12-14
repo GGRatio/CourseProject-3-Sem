@@ -18,11 +18,10 @@ ExitProcess PROTO:DWORD
 		newline byte 13, 10, 0
 		LTRL1 sdword 12
 		LTRL2 sdword 10
-		LTRL3 sdword 1
-		LTRL4 sdword 3
-		LTRL5 sdword 2
-		LTRL6 sdword 4
-		LTRL7 byte 'c', 0
+		LTRL3 sdword 3
+		LTRL4 sdword 2
+		LTRL5 sdword 4
+		LTRL6 byte 'c', 0
 .data
 		temp sdword ?
 		buffer byte 256 dup(0)
@@ -82,34 +81,29 @@ push LTRL1
 pop ebx
 mov mainc, ebx
 
-push mainc
-push LTRL3
-pop ebx
-pop eax
-add eax, ebx
-push eax
+push LTRL1
 
 pop ebx
 mov mainc, ebx
 
 mov edx, mainc
-cmp edx, LTRL4
+cmp edx, LTRL3
 
 jl right1
 jge wrong1
 right1:
 
-push LTRL5
+push LTRL4
 call outlich
 
 jmp next1
 wrong1:
 
-push LTRL6
+push LTRL5
 call outlich
 
 next1:
-mov squareb, offset LTRL7
+mov squareb, offset LTRL6
 push 0
 call ExitProcess
 main ENDP

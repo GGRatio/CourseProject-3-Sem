@@ -264,7 +264,10 @@ namespace Lexer
 			Log::writeError(log.stream, Error::GetError(303, line, 0));
 			lex_ok = false;
 		}
-		// Сначала проверяем тип - это более приоритетная ошибка
+		// Сначала проверяем тип - это более приоритетная 
+
+
+
 		if (itentry->iddatatype == IT::IDDATATYPE::UNDEF)
 		{
 			Log::writeError(log.stream, Error::GetError(300, line, 0));

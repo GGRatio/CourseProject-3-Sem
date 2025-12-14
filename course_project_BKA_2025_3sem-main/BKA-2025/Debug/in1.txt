@@ -1,19 +1,18 @@
-byte function square(byte x, byte z)[
+byte function square (byte x, byte z )[
 	var byte l = 12;
-	return 12;
+	return 2;
 ]
 main[	
 	var byte x;
 	x = 12;
 	var byte y;
-	y = square(12, 12);
+	y = square (12, 12);
 	var byte p = 10;
 	var byte c = 12;
-	c = 12/0;
+	c = 12;
 	is: c < 3 #
 	if [print 2;]
 	else[print 4;]#
-	var char b = 'csdf';
-	
+	var char b = 'c';
 
 ]

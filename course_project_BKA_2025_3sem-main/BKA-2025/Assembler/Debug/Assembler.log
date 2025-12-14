@@ -1,5 +1,5 @@
 ﻿  Assembling ..\Debug\in.txt.asm...
-..\Debug\in.txt.asm(55): warning A6004: procedure argument or local not referenced : squarex
-..\Debug\in.txt.asm(55): warning A6004: procedure argument or local not referenced : squarez
+..\Debug\in.txt.asm(54): warning A6004: procedure argument or local not referenced : squarex
+..\Debug\in.txt.asm(54): warning A6004: procedure argument or local not referenced : squarez
 LINK : warning LNK4098: библиотека по умолчанию "libucrt.lib" конфликтует с использованием других библиотек; используйте /NODEFAULTLIB:library
   Assembler.vcxproj -> D:\University\КПО\CP-BKA-2025\CourseProject\course_project_BKA_2025_3sem-main\BKA-2025\Debug\Assembler.exe
