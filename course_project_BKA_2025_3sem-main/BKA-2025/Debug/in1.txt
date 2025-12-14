@@ -1,7 +1,6 @@
-main[
-	var byte r;
-	var byte x;
-	x = 'q';
-	print 12;
+main[	
+	var line x;
+	x = "sdd";
+	print x;
 
 ]

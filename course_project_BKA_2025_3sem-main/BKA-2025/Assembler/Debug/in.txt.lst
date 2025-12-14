@@ -1,4 +1,4 @@
-Microsoft (R) Macro Assembler Version 14.44.35213.0	    12/14/25 16:52:53
+Microsoft (R) Macro Assembler Version 14.44.35213.0	    12/14/25 17:05:16
 ..\Debug\in.txt.asm					     Page 1 - 1
 
 
@@ -20,31 +20,28 @@ Microsoft (R) Macro Assembler Version 14.44.35213.0	    12/14/25 16:52:53
 
  00000000			.const
  00000000 0D 0A 00				newline byte 13, 10, 0
- 00000003 0000000C				LTRL1 sdword 12
+ 00000003 73 64 73 64 00			LTRL1 byte 'sdsd', 0
  00000000			.data
  00000000 00000000				temp sdword ?
  00000004  00000100 [				buffer byte 256 dup(0)
 	    00
 	   ]
- 00000104 00000000				mainq dword 0
+ 00000104 00000000				mainx dword ?
  00000000			.code
 
 				;----------- MAIN ------------
  00000000			main PROC
- 00000000  FF 35 00000003 R	push LTRL1
+ 00000000  C7 05 00000104 R	mov mainx, offset LTRL1
+	   00000003 R
 
- 00000006  5B			pop ebx
- 00000007  89 1D 00000104 R	mov mainq, ebx
+ 0000000A  FF 35 00000104 R	push mainx
+ 00000010  E8 00000000 E	call outrad
 
-
- 0000000D  FF 35 00000104 R	push mainq
- 00000013  E8 00000000 E	call outlich
-
- 00000018  6A 00		push 0
- 0000001A  E8 00000000 E	call ExitProcess
- 0000001F			main ENDP
+ 00000015  6A 00		push 0
+ 00000017  E8 00000000 E	call ExitProcess
+ 0000001C			main ENDP
 				end main
-Microsoft (R) Macro Assembler Version 14.44.35213.0	    12/14/25 16:52:53
+Microsoft (R) Macro Assembler Version 14.44.35213.0	    12/14/25 17:05:16
 ..\Debug\in.txt.asm					     Symbols 2 - 1
 
 
@@ -54,11 +51,11 @@ Segments and Groups:
 
                 N a m e                 Size     Length   Align   Combine Class
 
-CONST  . . . . . . . . . . . . .	32 Bit	 00000007 Para	  Public  'CONST'	 ReadOnly
+CONST  . . . . . . . . . . . . .	32 Bit	 00000008 Para	  Public  'CONST'	 ReadOnly
 FLAT . . . . . . . . . . . . . .	GROUP
 STACK  . . . . . . . . . . . . .	32 Bit	 00001000 Para	  Stack	  'STACK'	 
 _DATA  . . . . . . . . . . . . .	32 Bit	 00000108 Para	  Public  'DATA'	
-_TEXT  . . . . . . . . . . . . .	32 Bit	 0000001F Para	  Public  'CODE'	
+_TEXT  . . . . . . . . . . . . .	32 Bit	 0000001C Para	  Public  'CODE'	
 
 
 Procedures, parameters, and locals:
@@ -66,7 +63,7 @@ Procedures, parameters, and locals:
                 N a m e                 Type     Value    Attr
 
 ExitProcess  . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
-main . . . . . . . . . . . . . .	P Near	 00000000 _TEXT	Length= 0000001F Public STDCALL
+main . . . . . . . . . . . . . .	P Near	 00000000 _TEXT	Length= 0000001C Public STDCALL
 myabs  . . . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
 mypow  . . . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
 outlich  . . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
@@ -86,9 +83,9 @@ Symbols:
 @fardata?  . . . . . . . . . . .	Text   	 FLAT
 @fardata . . . . . . . . . . . .	Text   	 FLAT
 @stack . . . . . . . . . . . . .	Text   	 FLAT
-LTRL1  . . . . . . . . . . . . .	DWord	 00000003 CONST	
+LTRL1  . . . . . . . . . . . . .	Byte	 00000003 CONST	
 buffer . . . . . . . . . . . . .	Byte	 00000004 _DATA	
-mainq  . . . . . . . . . . . . .	DWord	 00000104 _DATA	
+mainx  . . . . . . . . . . . . .	DWord	 00000104 _DATA	
 newline  . . . . . . . . . . . .	Byte	 00000000 CONST	
 temp . . . . . . . . . . . . . .	DWord	 00000000 _DATA	
 

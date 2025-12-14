@@ -98,10 +98,7 @@ namespace Log
 				<< ": " << e.position.col;
 			*stream << std::endl;
 		}
-		
-		// 
-		
-		throw ERROR_THROW(e.id);
+		throw e;
 	}
 
 	void writeWords(std::ostream* stream, In::InWord* words)

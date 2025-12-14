@@ -1,6 +1,8 @@
 //TODO: Все ошибки до синтаксических (600) выводятся дважды 
 // решено
-//TODO: Не корректное отобрадение строки ошибки
+//TODO: Не корректное отображение строки ошибки
+//решено
+
 
 #include "Error.h"
 
@@ -21,7 +23,7 @@ namespace Error
 		ERROR_ENTRY_NODEF(104), ERROR_ENTRY_NODEF(105), ERROR_ENTRY_NODEF(106), ERROR_ENTRY_NODEF(107), ERROR_ENTRY_NODEF(108), ERROR_ENTRY_NODEF(109),
 		ERROR_ENTRY_NODEF10(110), ERROR_ENTRY_NODEF10(120), ERROR_ENTRY_NODEF10(130), ERROR_ENTRY_NODEF10(140),
 		ERROR_ENTRY_NODEF10(150), ERROR_ENTRY_NODEF10(160), ERROR_ENTRY_NODEF10(170), ERROR_ENTRY_NODEF10(180), ERROR_ENTRY_NODEF10(190),
-		ERROR_ENTRY(200, "Лексическая ошибка: недопустимый символ в исходном коде(-in)"),
+		ERROR_ENTRY(200, "Лексическая ошибка: недопустимый символ в исходном коде(-in)"), //+
 		ERROR_ENTRY(201, "Лексическая ошибка: неизвестная последовательность символов"),
 		ERROR_ENTRY(202, "Лексическая ошибка: неверный размер строки"),
 		ERROR_ENTRY(203, "Лексическая ошибка: неверный размер идентификатора"),

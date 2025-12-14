@@ -16,23 +16,19 @@ ExitProcess PROTO:DWORD
 
 .const
 		newline byte 13, 10, 0
-		LTRL1 sdword 12
+		LTRL1 byte 'sdd', 0
 .data
 		temp sdword ?
 		buffer byte 256 dup(0)
-		mainq dword 0
+		mainx dword ?
 .code
 
 ;----------- MAIN ------------
 main PROC
-push LTRL1
+mov mainx, offset LTRL1
 
-pop ebx
-mov mainq, ebx
-
-
-push mainq
-call outlich
+push mainx
+call outrad
 
 push 0
 call ExitProcess
