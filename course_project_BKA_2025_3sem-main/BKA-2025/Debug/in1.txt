@@ -1,4 +1,7 @@
 main[
-	print q;
+	var byte r;
+	var byte x;
+	x = 'q';
+	print 12;
 
 ]

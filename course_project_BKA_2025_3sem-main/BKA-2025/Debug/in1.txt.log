@@ -1,5 +1,5 @@
 п»ї
------------ Compiler BKA-2025 ------------ Date: 14.12.2025 16:29:34 ------------ 
+----------- Compiler BKA-2025 ------------ Date: 14.12.2025 16:47:21 ------------ 
 
 
 ----- Settings --------
@@ -7,9 +7,135 @@
 -out: in.txt.asm
 -log: in1.txt.log
 ---- Initial data ------
-Symbol count:  19
+Symbol count:  56
 Ignored:   0
-Lines count:   5
+Lines count:   8
+
+------------------------------ Таблица лексем  ------------------------
+
+|  N | Лексема | Строка | Индекс в ТИ |
+|  0 |    m    |    1   |             |
+|  1 |    [    |    1   |             |
+|  2 |    n    |    2   |             |
+|  3 |    t    |    2   |             |
+|  4 |    i    |    2   |       0     |
+|  5 |    ;    |    2   |             |
+|  6 |    n    |    3   |             |
+|  7 |    t    |    3   |             |
+|  8 |    i    |    3   |       1     |
+|  9 |    ;    |    3   |             |
+| 10 |    i    |    4   |       1     |
+| 11 |    =    |    4   |             |
+| 12 |    l    |    4   |       2     |
+| 13 |    ;    |    4   |             |
+| 14 |    o    |    5   |             |
+| 15 |    l    |    5   |       3     |
+| 16 |    ;    |    5   |             |
+| 17 |    ]    |    7   |             |
+---------------------------- Identifier Table ------------------------
+
+|  N  | LT Index  |   Identifier Type  |        Name       | Value
+|   0 |      4    |   byte  variable   |                             mainr |0
+|   1 |      8    |   byte  variable   |                             mainx |0
+|   2 |     12    |   char   literal   |                             LTRL1 |[1]q
+|   3 |     15    |   byte   literal   |                             LTRL2 |12
+
+-------------------------------------------------------------------------
 
 
- N304: Семантическая ошибка: переменная объявлена без ключевого слова var : 2
+-----------------  Таблица последовательности исходного кода ---------------------
+
+  1 | m[
+  2 | nti[0];
+  3 | nti[1];
+  4 | i[1]=l[2];
+  5 | ol[3];
+  7 | ]
+-------------------------------------------------------------------------
+
+N   :Rule                Input                         Stack               
+0   :S->m[K]             m[nti;nti;i=l;ol;]            S$                  
+1   : SAVESTATE:          1
+1   :                    m[nti;nti;i=l;ol;]            m[K]$               
+2   :                    [nti;nti;i=l;ol;]             [K]$                
+3   :                    nti;nti;i=l;ol;]              K]$                 
+4   :K->nti=V;K          nti;nti;i=l;ol;]              K]$                 
+5   : SAVESTATE:          2
+5   :                    nti;nti;i=l;ol;]              nti=V;K]$           
+6   :                    ti;nti;i=l;ol;]               ti=V;K]$            
+7   :                    i;nti;i=l;ol;]                i=V;K]$             
+8   :                    ;nti;i=l;ol;]                 =V;K]$              
+9   : TS_NOK/NS_NORULECHAIN
+9   : RESSTATE            
+9   :                    nti;nti;i=l;ol;]              K]$                 
+10  :K->nti;K            nti;nti;i=l;ol;]              K]$                 
+11  : SAVESTATE:          2
+11  :                    nti;nti;i=l;ol;]              nti;K]$             
+12  :                    ti;nti;i=l;ol;]               ti;K]$              
+13  :                    i;nti;i=l;ol;]                i;K]$               
+14  :                    ;nti;i=l;ol;]                 ;K]$                
+15  :                    nti;i=l;ol;]                  K]$                 
+16  :K->nti=V;K          nti;i=l;ol;]                  K]$                 
+17  : SAVESTATE:          3
+17  :                    nti;i=l;ol;]                  nti=V;K]$           
+18  :                    ti;i=l;ol;]                   ti=V;K]$            
+19  :                    i;i=l;ol;]                    i=V;K]$             
+20  :                    ;i=l;ol;]                     =V;K]$              
+21  : TS_NOK/NS_NORULECHAIN
+21  : RESSTATE            
+21  :                    nti;i=l;ol;]                  K]$                 
+22  :K->nti;K            nti;i=l;ol;]                  K]$                 
+23  : SAVESTATE:          3
+23  :                    nti;i=l;ol;]                  nti;K]$             
+24  :                    ti;i=l;ol;]                   ti;K]$              
+25  :                    i;i=l;ol;]                    i;K]$               
+26  :                    ;i=l;ol;]                     ;K]$                
+27  :                    i=l;ol;]                      K]$                 
+28  :K->i=W;K            i=l;ol;]                      K]$                 
+29  : SAVESTATE:          4
+29  :                    i=l;ol;]                      i=W;K]$             
+30  :                    =l;ol;]                       =W;K]$              
+31  :                    l;ol;]                        W;K]$               
+32  :W->l                l;ol;]                        W;K]$               
+33  : SAVESTATE:          5
+33  :                    l;ol;]                        l;K]$               
+34  :                    ;ol;]                         ;K]$                
+35  :                    ol;]                          K]$                 
+36  :K->oV;K             ol;]                          K]$                 
+37  : SAVESTATE:          6
+37  :                    ol;]                          oV;K]$              
+38  :                    l;]                           V;K]$               
+39  :V->l                l;]                           V;K]$               
+40  : SAVESTATE:          7
+40  :                    l;]                           l;K]$               
+41  :                    ;]                            ;K]$                
+42  :                    ]                             K]$                 
+43  : TNS_NORULECHAIN/NS_NORULE
+43  : RESSTATE            
+43  :                    l;]                           V;K]$               
+44  : TNS_NORULECHAIN/NS_NORULE
+44  : RESSTATE            
+44  :                    ol;]                          K]$                 
+45  :K->oV;              ol;]                          K]$                 
+46  : SAVESTATE:          6
+46  :                    ol;]                          oV;]$               
+47  :                    l;]                           V;]$                
+48  :V->l                l;]                           V;]$                
+49  : SAVESTATE:          7
+49  :                    l;]                           l;]$                
+50  :                    ;]                            ;]$                 
+51  :                    ]                             ]$                  
+52  :                                                  $                   
+53  : LENTA_END           
+54  : ------>LENTA_END    
+-------------------------------------------------------------------------------------
+0   : Input size 18, syntax analysis completed successfully 
+0   : S->m[K]             
+2   : K->nti;K            
+6   : K->nti;K            
+10  : K->i=W;K            
+12  : W->l                
+14  : K->oV;              
+15  : V->l                
+
+ N314: Семантическая ошибка: несоответствие типов в присваивании : 4

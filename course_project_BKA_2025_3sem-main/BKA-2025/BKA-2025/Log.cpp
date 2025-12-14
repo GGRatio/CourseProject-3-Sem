@@ -100,15 +100,6 @@ namespace Log
 		}
 		
 		// 
-		if (e.position.col == -1 || e.position.line == -1)
-			std::cout << std::endl << " N" << e.id << ": " << e.message << std::endl;
-		else if (e.position.col == 0)
-			std::cout << std::endl << " N" << e.id << ": " << e.message
-			<< " : " << e.position.line << std::endl;
-		else
-			std::cout << std::endl << " N" << e.id << ": " << e.message
-			<< " : " << e.position.line
-			<< ": " << e.position.col << std::endl;
 		
 		throw ERROR_THROW(e.id);
 	}
