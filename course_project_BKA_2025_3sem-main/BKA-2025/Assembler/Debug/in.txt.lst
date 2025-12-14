@@ -1,4 +1,4 @@
-Microsoft (R) Macro Assembler Version 14.44.35213.0	    12/14/25 17:25:32
+Microsoft (R) Macro Assembler Version 14.44.35213.0	    12/14/25 18:44:35
 ..\Debug\in.txt.asm					     Page 1 - 1
 
 
@@ -20,28 +20,110 @@ Microsoft (R) Macro Assembler Version 14.44.35213.0	    12/14/25 17:25:32
 
  00000000			.const
  00000000 0D 0A 00				newline byte 13, 10, 0
- 00000003 73 64 64 00				LTRL1 byte 'sdd', 0
+ 00000003 0000000C				LTRL1 sdword 12
+ 00000007 0000000A				LTRL2 sdword 10
+ 0000000B 00000001				LTRL3 sdword 1
+ 0000000F 00000003				LTRL4 sdword 3
+ 00000013 00000002				LTRL5 sdword 2
+ 00000017 00000004				LTRL6 sdword 4
+ 0000001B 63 00					LTRL7 byte 'c', 0
  00000000			.data
  00000000 00000000				temp sdword ?
  00000004  00000100 [				buffer byte 256 dup(0)
 	    00
 	   ]
- 00000104 00000000				mainx dword ?
+ 00000104 00000000				squarel dword 0
+ 00000108 00000000				mainx dword 0
+ 0000010C 00000000				mainy dword 0
+ 00000110 00000000				mainp dword 0
+ 00000114 00000000				mainc dword 0
+ 00000118 00000000				squareb dword ?
  00000000			.code
 
+				;----------- square ------------
+ 00000000			square PROC,
+					squarex : sdword, squarez : sdword  
+				; --- save registers ---
+ 00000003  53			push ebx
+ 00000004  52			push edx
+				; ----------------------
+ 00000005  FF 35 00000003 R	push LTRL1
+
+ 0000000B  5B			pop ebx
+ 0000000C  89 1D 00000104 R	mov squarel, ebx
+
+				; --- restore registers ---
+ 00000012  5A			pop edx
+ 00000013  5B			pop ebx
+				; -------------------------
+ 00000014  A1 00000003 R	mov eax, LTRL1
+				ret
+ 0000001D			square ENDP
+..\Debug\in.txt.asm(55) : warning A6004:procedure argument or local not referenced : squarex
+..\Debug\in.txt.asm(55) : warning A6004:procedure argument or local not referenced : squarez
+				;------------------------------
+
+
 				;----------- MAIN ------------
- 00000000			main PROC
- 00000000  C7 05 00000104 R	mov mainx, offset LTRL1
-	   00000003 R
+ 0000001D			main PROC
+ 0000001D  FF 35 00000003 R	push LTRL1
 
- 0000000A  FF 35 00000104 R	push mainx
- 00000010  E8 00000000 E	call outrad
+ 00000023  5B			pop ebx
+ 00000024  89 1D 00000108 R	mov mainx, ebx
 
- 00000015  6A 00		push 0
- 00000017  E8 00000000 E	call ExitProcess
- 0000001C			main ENDP
+
+ 0000002A  FF 35 00000003 R	push LTRL1
+ 00000030  FF 35 00000003 R	push LTRL1
+ 00000036  E8 FFFFFFC5		call square
+ 0000003B  50			push eax
+
+ 0000003C  5B			pop ebx
+ 0000003D  89 1D 0000010C R	mov mainy, ebx
+
+ 00000043  FF 35 00000007 R	push LTRL2
+
+ 00000049  5B			pop ebx
+ 0000004A  89 1D 00000110 R	mov mainp, ebx
+
+ 00000050  FF 35 00000003 R	push LTRL1
+
+ 00000056  5B			pop ebx
+ 00000057  89 1D 00000114 R	mov mainc, ebx
+
+ 0000005D  FF 35 00000114 R	push mainc
+ 00000063  FF 35 0000000B R	push LTRL3
+ 00000069  5B			pop ebx
+ 0000006A  58			pop eax
+ 0000006B  03 C3		add eax, ebx
+ 0000006D  50			push eax
+
+ 0000006E  5B			pop ebx
+ 0000006F  89 1D 00000114 R	mov mainc, ebx
+
+ 00000075  8B 15 00000114 R	mov edx, mainc
+ 0000007B  3B 15 0000000F R	cmp edx, LTRL4
+
+ 00000081  7C 02		jl right1
+ 00000083  7D 0D		jge wrong1
+ 00000085			right1:
+
+ 00000085  FF 35 00000013 R	push LTRL5
+ 0000008B  E8 00000000 E	call outlich
+
+ 00000090  EB 0B		jmp next1
+ 00000092			wrong1:
+
+ 00000092  FF 35 00000017 R	push LTRL6
+ 00000098  E8 00000000 E	call outlich
+
+ 0000009D			next1:
+ 0000009D  C7 05 00000118 R	mov squareb, offset LTRL7
+	   0000001B R
+ 000000A7  6A 00		push 0
+ 000000A9  E8 00000000 E	call ExitProcess
+ 000000AE			main ENDP
 				end main
-Microsoft (R) Macro Assembler Version 14.44.35213.0	    12/14/25 17:25:32
+Microsoft (R) Macro Assembler Version 14.44.35213.0	    12/14/25 18:44:35
 ..\Debug\in.txt.asm					     Symbols 2 - 1
 
 
@@ -51,11 +133,11 @@ Segments and Groups:
 
                 N a m e                 Size     Length   Align   Combine Class
 
-CONST  . . . . . . . . . . . . .	32 Bit	 00000007 Para	  Public  'CONST'	 ReadOnly
+CONST  . . . . . . . . . . . . .	32 Bit	 0000001D Para	  Public  'CONST'	 ReadOnly
 FLAT . . . . . . . . . . . . . .	GROUP
 STACK  . . . . . . . . . . . . .	32 Bit	 00001000 Para	  Stack	  'STACK'	 
-_DATA  . . . . . . . . . . . . .	32 Bit	 00000108 Para	  Public  'DATA'	
-_TEXT  . . . . . . . . . . . . .	32 Bit	 0000001C Para	  Public  'CODE'	
+_DATA  . . . . . . . . . . . . .	32 Bit	 0000011C Para	  Public  'DATA'	
+_TEXT  . . . . . . . . . . . . .	32 Bit	 000000AE Para	  Public  'CODE'	
 
 
 Procedures, parameters, and locals:
@@ -63,11 +145,17 @@ Procedures, parameters, and locals:
                 N a m e                 Type     Value    Attr
 
 ExitProcess  . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
-main . . . . . . . . . . . . . .	P Near	 00000000 _TEXT	Length= 0000001C Public STDCALL
+main . . . . . . . . . . . . . .	P Near	 0000001D _TEXT	Length= 00000091 Public STDCALL
+  right1 . . . . . . . . . . . .	L Near	 00000085 _TEXT	
+  wrong1 . . . . . . . . . . . .	L Near	 00000092 _TEXT	
+  next1  . . . . . . . . . . . .	L Near	 0000009D _TEXT	
 myabs  . . . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
 mypow  . . . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
 outlich  . . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
 outrad . . . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
+square . . . . . . . . . . . . .	P Near	 00000000 _TEXT	Length= 0000001D Public STDCALL
+  squarex  . . . . . . . . . . .	DWord	 bp + 00000008
+  squarez  . . . . . . . . . . .	DWord	 bp + 0000000C
 
 
 Symbols:
@@ -83,11 +171,22 @@ Symbols:
 @fardata?  . . . . . . . . . . .	Text   	 FLAT
 @fardata . . . . . . . . . . . .	Text   	 FLAT
 @stack . . . . . . . . . . . . .	Text   	 FLAT
-LTRL1  . . . . . . . . . . . . .	Byte	 00000003 CONST	
+LTRL1  . . . . . . . . . . . . .	DWord	 00000003 CONST	
+LTRL2  . . . . . . . . . . . . .	DWord	 00000007 CONST	
+LTRL3  . . . . . . . . . . . . .	DWord	 0000000B CONST	
+LTRL4  . . . . . . . . . . . . .	DWord	 0000000F CONST	
+LTRL5  . . . . . . . . . . . . .	DWord	 00000013 CONST	
+LTRL6  . . . . . . . . . . . . .	DWord	 00000017 CONST	
+LTRL7  . . . . . . . . . . . . .	Byte	 0000001B CONST	
 buffer . . . . . . . . . . . . .	Byte	 00000004 _DATA	
-mainx  . . . . . . . . . . . . .	DWord	 00000104 _DATA	
+mainc  . . . . . . . . . . . . .	DWord	 00000114 _DATA	
+mainp  . . . . . . . . . . . . .	DWord	 00000110 _DATA	
+mainx  . . . . . . . . . . . . .	DWord	 00000108 _DATA	
+mainy  . . . . . . . . . . . . .	DWord	 0000010C _DATA	
 newline  . . . . . . . . . . . .	Byte	 00000000 CONST	
+squareb  . . . . . . . . . . . .	DWord	 00000118 _DATA	
+squarel  . . . . . . . . . . . .	DWord	 00000104 _DATA	
 temp . . . . . . . . . . . . . .	DWord	 00000000 _DATA	
 
-	   0 Warnings
+	   2 Warnings
 	   0 Errors

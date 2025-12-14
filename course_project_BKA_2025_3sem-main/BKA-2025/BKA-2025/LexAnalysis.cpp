@@ -259,7 +259,12 @@ namespace Lexer
 
 		int i = tables.lextable.size;
 
-		// РЎРЅР°С‡Р°Р»Р° РїСЂРѕРІРµСЂСЏРµРј С‚РёРї - СЌС‚Рѕ Р±РѕР»РµРµ РїСЂРёРѕСЂРёС‚РµС‚РЅР°СЏ РѕС€РёР±РєР°
+		if (i > 1 && itentry->idtype == IT::IDTYPE::F && tables.lextable.table[i - 1].lexema != LEX_FUNCTION)
+		{
+			Log::writeError(log.stream, Error::GetError(303, line, 0));
+			lex_ok = false;
+		}
+		// Сначала проверяем тип - это более приоритетная ошибка
 		if (itentry->iddatatype == IT::IDDATATYPE::UNDEF)
 		{
 			Log::writeError(log.stream, Error::GetError(300, line, 0));
@@ -267,15 +272,10 @@ namespace Lexer
 			return itentry;
 		}
 		
-		// РўРѕР»СЊРєРѕ РµСЃР»Рё С‚РёРї РѕРїСЂРµРґРµР»РµРЅ, РїСЂРѕРІРµСЂСЏРµРј РЅР°Р»РёС‡РёРµ var/function
+		// Только если тип определен, проверяем наличие var/function
 		if (i > 1 && itentry->idtype == IT::IDTYPE::V && tables.lextable.table[i - 2].lexema != LEX_VAR)
 		{
 			Log::writeError(log.stream, Error::GetError(304, line, 0));
-			lex_ok = false;
-		}
-		if (i > 1 && itentry->idtype == IT::IDTYPE::F && tables.lextable.table[i - 1].lexema != LEX_FUNCTION)
-		{
-			Log::writeError(log.stream, Error::GetError(303, line, 0));
 			lex_ok = false;
 		}
 		return itentry;
@@ -288,10 +288,34 @@ namespace Lexer
 		tables.idtable = IT::Create(MAXSIZE_TI);
 
 		bool isParam = false, isFunc = false;
-		int enterPoint = NULL;
+		int enterPoint = 0;
 		char curword[STR_MAXSIZE], nextword[STR_MAXSIZE];
 		int curline;
 		std::stack <char*> scopes;
+		
+		// Сначала проверяем наличие main
+		for (int i = 0; i < In::InWord::size; i++)
+		{
+			if (strcmp(in.words[i].word, MAIN) == 0)
+			{
+				enterPoint++;
+			}
+		}
+		
+		if (enterPoint == 0)
+		{
+			Log::writeError(log.stream, Error::GetError(301));
+			lex_ok = false;
+		}
+		if (enterPoint > 1)
+		{
+			Log::writeError(log.stream, Error::GetError(302));
+			lex_ok = false;
+		}
+		
+		// Сбрасываем счетчик для подсчета во время обработки
+		enterPoint = 0;
+		
 		for (int i = 0; i < In::InWord::size; i++)
 		{
 			strcpy_s(curword, in.words[i].word);
@@ -311,6 +335,9 @@ namespace Lexer
 					{
 					case LEX_MAIN:
 						enterPoint++;
+						break;
+					case LEX_VAR:
+						lexema = graphs[j].lexema;
 						break;
 					case LEX_SEPARATORS:
 					{
@@ -480,16 +507,6 @@ namespace Lexer
 			}
 		}
 
-		if (enterPoint == NULL)
-		{
-			Log::writeError(log.stream, Error::GetError(301));
-			lex_ok = false;
-		}
-		if (enterPoint > 1)
-		{
-			Log::writeError(log.stream, Error::GetError(302));
-			lex_ok = false;
-		}
 		return lex_ok;
 	}
 };

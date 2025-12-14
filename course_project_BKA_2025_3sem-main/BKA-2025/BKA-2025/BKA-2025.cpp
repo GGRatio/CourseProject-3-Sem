@@ -82,7 +82,7 @@ int wmain(int argc, wchar_t* argv[])
 	}
 	catch (Error::ERROR e)
 	{
-		std::cout << "Ошибка " << e.id << ": " << e.message << ", Строка " << e.position.line << ", Позиция " << e.position.col << std::endl;
+		std::cout << "Ошибка, " << e.id << ": " << e.message << ", Строка " << e.position.line << ", Позиция " << e.position.col << std::endl;
 		system("pause");
 	}
 	return 0;

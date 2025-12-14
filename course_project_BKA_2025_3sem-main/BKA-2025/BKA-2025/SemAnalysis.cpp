@@ -17,11 +17,12 @@ namespace Semantic
 			{
 			case LEX_VAR:
 			{
-				if (tables.lextable.table[i + 1].lexema != LEX_ID_TYPE)
+				if (i + 1 < tables.lextable.size && tables.lextable.table[i + 1].lexema != LEX_ID_TYPE)
 				{
 					sem_ok = false;
 					Log::writeError(log.stream, Error::GetError(303, tables.lextable.table[i].sn, 0));
 				}
+				break;
 			}
 			case LEX_DIRSLASH:
 			{
@@ -158,11 +159,6 @@ namespace Semantic
 						if (paramscount != e.value.params.count)
 						{
 							Log::writeError(log.stream, Error::GetError(308, tables.lextable.table[i].sn, 0));
-							sem_ok = false;
-						}
-						if (paramscount > 3)
-						{
-							Log::writeError(log.stream, Error::GetError(307, tables.lextable.table[i].sn, 0));
 							sem_ok = false;
 						}
 					}
