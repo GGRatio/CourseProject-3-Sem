@@ -1,4 +1,4 @@
-Microsoft (R) Macro Assembler Version 14.44.35213.0	    12/14/25 17:05:16
+Microsoft (R) Macro Assembler Version 14.44.35213.0	    12/14/25 17:25:32
 ..\Debug\in.txt.asm					     Page 1 - 1
 
 
@@ -20,7 +20,7 @@ Microsoft (R) Macro Assembler Version 14.44.35213.0	    12/14/25 17:05:16
 
  00000000			.const
  00000000 0D 0A 00				newline byte 13, 10, 0
- 00000003 73 64 73 64 00			LTRL1 byte 'sdsd', 0
+ 00000003 73 64 64 00				LTRL1 byte 'sdd', 0
  00000000			.data
  00000000 00000000				temp sdword ?
  00000004  00000100 [				buffer byte 256 dup(0)
@@ -41,7 +41,7 @@ Microsoft (R) Macro Assembler Version 14.44.35213.0	    12/14/25 17:05:16
  00000017  E8 00000000 E	call ExitProcess
  0000001C			main ENDP
 				end main
-Microsoft (R) Macro Assembler Version 14.44.35213.0	    12/14/25 17:05:16
+Microsoft (R) Macro Assembler Version 14.44.35213.0	    12/14/25 17:25:32
 ..\Debug\in.txt.asm					     Symbols 2 - 1
 
 
@@ -51,7 +51,7 @@ Segments and Groups:
 
                 N a m e                 Size     Length   Align   Combine Class
 
-CONST  . . . . . . . . . . . . .	32 Bit	 00000008 Para	  Public  'CONST'	 ReadOnly
+CONST  . . . . . . . . . . . . .	32 Bit	 00000007 Para	  Public  'CONST'	 ReadOnly
 FLAT . . . . . . . . . . . . . .	GROUP
 STACK  . . . . . . . . . . . . .	32 Bit	 00001000 Para	  Stack	  'STACK'	 
 _DATA  . . . . . . . . . . . . .	32 Bit	 00000108 Para	  Public  'DATA'	

@@ -1,6 +1,6 @@
 main[	
-	var line x;
-	x = "sdd";
+	var x;
+	x = 12;
 	print x;
 
 ]

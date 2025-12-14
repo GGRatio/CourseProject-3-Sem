@@ -1,5 +1,4 @@
-﻿C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppClean.targets(77,5): warning : Отказано в доступе по пути "d:\university\кпо\cp-bka-2025\courseproject\course_project_bka_2025_3sem-main\bka-2025\debug\bka-2025.exe".
-  Error.cpp
+﻿  Error.cpp
   FST.cpp
   Generator.cpp
   GRB.cpp

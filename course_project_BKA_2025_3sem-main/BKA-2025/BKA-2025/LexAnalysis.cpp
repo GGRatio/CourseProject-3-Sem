@@ -259,6 +259,15 @@ namespace Lexer
 
 		int i = tables.lextable.size;
 
+		// Сначала проверяем тип - это более приоритетная ошибка
+		if (itentry->iddatatype == IT::IDDATATYPE::UNDEF)
+		{
+			Log::writeError(log.stream, Error::GetError(300, line, 0));
+			lex_ok = false;
+			return itentry;
+		}
+		
+		// Только если тип определен, проверяем наличие var/function
 		if (i > 1 && itentry->idtype == IT::IDTYPE::V && tables.lextable.table[i - 2].lexema != LEX_VAR)
 		{
 			Log::writeError(log.stream, Error::GetError(304, line, 0));
@@ -267,11 +276,6 @@ namespace Lexer
 		if (i > 1 && itentry->idtype == IT::IDTYPE::F && tables.lextable.table[i - 1].lexema != LEX_FUNCTION)
 		{
 			Log::writeError(log.stream, Error::GetError(303, line, 0));
-			lex_ok = false;
-		}
-		if (itentry->iddatatype == IT::IDDATATYPE::UNDEF)
-		{
-			Log::writeError(log.stream, Error::GetError(300, line, 0));
 			lex_ok = false;
 		}
 		return itentry;
@@ -471,6 +475,7 @@ namespace Lexer
 				{
 					Log::writeError(log.stream, Error::GetError(201, curline, 0));
 					lex_ok = false;
+					break;
 				}
 			}
 		}
